@@ -608,7 +608,7 @@ cdm.train(response_logs.transform(choice="train", batch_size=64),
           response_logs.transform(choice="test", batch_size=64),
           q_matrix=response_logs.q_matrix,
           r_matrix=response_logs.get_r_matrix(choice="test"),
-          epoch=10)
+          epoch=5)
 
 # measure HI and CI
 proficiency_level = cdm.net.get_proficiency_level()
