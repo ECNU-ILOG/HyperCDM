@@ -8,7 +8,7 @@ import numpy as np
 import scipy.sparse as sp
 import numbers
 
-
+from scipy.special import expit
 from pandas import read_csv
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, roc_auc_score, f1_score
@@ -16,9 +16,11 @@ from sklearn.cluster import KMeans
 from torch import optim
 from torch.utils.data import TensorDataset, DataLoader
 from tqdm import tqdm
-from DOA import DOA
 from collections import OrderedDict
 from joblib import Parallel, delayed
+
+from DOA import DOA
+from homogeneity import cosine_similarity, euclidean_similarity
 
 
 class AutoEncoder(nn.Module):
@@ -347,12 +349,10 @@ class ResponseLogs:
             H = H[:, np.count_nonzero(H, axis=0) >= 2]  # remove empty edge
         elif choice == "exercise":
             print("Construct exercise hypergraph")
-            # strategy one
             H = self.q_matrix.copy()
             H = H[:, np.count_nonzero(H, axis=0) >= 2]  # remove empty edge
         elif choice == "knowledge":
             print("Construct knowledge concept hypergraph")
-            # strategy one
             H = self.q_matrix.T.copy()
             H = H[:, np.count_nonzero(H, axis=0) >= 2]  # remove empty edge
         else:
@@ -387,6 +387,17 @@ class ResponseLogs:
                 score = line[2]
                 r_matrix[student_id, exercise_id] = int(score)
         elif choice == "test":
+            for line in self.test_set:
+                student_id = line[0]
+                exercise_id = line[1]
+                score = line[2]
+                r_matrix[student_id, exercise_id] = int(score)
+        elif choice == "total":
+            for line in self.train_set:
+                student_id = line[0]
+                exercise_id = line[1]
+                score = line[2]
+                r_matrix[student_id, exercise_id] = int(score)
             for line in self.test_set:
                 student_id = line[0]
                 exercise_id = line[1]
@@ -477,7 +488,7 @@ class HSCD_Net(nn.Module):
             if isinstance(layer, nn.Linear):
                 layer.apply(self.clipper)
 
-    def get_mastery_level(self):
+    def get_proficiency_level(self):
         convolved_student_emb = self.convolution(self.student_emb, self.student_adj)
         convolved_knowledge_emb = self.convolution(self.knowledge_emb, self.knowledge_adj)
 
@@ -562,7 +573,7 @@ class HyperCDM:
         self.net = self.net.to(self.device)
         self.net.eval()
         y_true, y_pred = [], []
-        mastery = self.net.get_mastery_level()
+        proficiency = self.net.get_proficiency_level()
         for batch_data in tqdm(test_set, "Evaluating"):
             student_id, exercise_id, knowledge, y = batch_data
             student_id: torch.Tensor = student_id.to(self.device)
@@ -579,7 +590,7 @@ class HyperCDM:
             print("Evaluation AUC: %.6f. ACC: %.6f. F1: %.6f" % (auc, acc, f1))
             return {"auc": auc, "acc": acc, "f1": f1}
         else:
-            doa = DOA(mastery, q_matrix, r_matrix)
+            doa = DOA(proficiency, q_matrix, r_matrix)
             print("Evaluation AUC: %.6f. ACC: %.6f. F1: %.6f. DOA: %.6f" % (auc, acc, f1, doa))
             return {"auc": auc, "acc": acc, "f1": f1, "doa": doa}
 
@@ -599,3 +610,24 @@ cdm.train(response_logs.transform(choice="train", batch_size=64),
           r_matrix=response_logs.get_r_matrix(choice="test"),
           epoch=10)
 
+# measure HI and CI
+proficiency_level = cdm.net.get_proficiency_level()
+
+mask = np.zeros((response_logs.config["student_num"], response_logs.config["student_num"]))
+scores = [0] * response_logs.config["student_num"]
+for line in response_logs.response_logs:
+    student_id = line[0]
+    score = line[2]
+    # if int(line[1]) in top_k:
+    scores[student_id] += int(score)
+for i in tqdm(range(len(scores))):
+    for j in range(i + 1, len(scores)):
+        if scores[i] == scores[j]:
+            mask[i, j] = mask[j, i] = 1
+normalized = np.count_nonzero(mask)
+
+sim_r = cosine_similarity(expit(response_logs.get_r_matrix("total")))
+sim_hypercdm = euclidean_similarity(proficiency_level)
+
+print(np.sum(sim_hypercdm * mask)/normalized)
+print(np.mean(sim_hypercdm * sim_r))

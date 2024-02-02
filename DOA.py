@@ -2,14 +2,14 @@ import numpy as np
 from joblib import Parallel, delayed
 
 
-def calculate_doa_k(mas_level, q_matrix, r_matrix, k):
-    n_students, n_skills = mas_level.shape
+def calculate_doa_k(proficiency_level, q_matrix, r_matrix, k):
+    n_students, n_skills = proficiency_level.shape
     n_questions, _ = q_matrix.shape
     n_attempts = r_matrix.shape[1]
     DOA_k = 0.0
     numerator = 0
     denominator = 0
-    delta_matrix = mas_level[:, k].reshape(-1, 1) > mas_level[:, k].reshape(1, -1)
+    delta_matrix = proficiency_level[:, k].reshape(-1, 1) > proficiency_level[:, k].reshape(1, -1)
     question_hask = np.where(q_matrix[:, k] != 0)[0].tolist()
     for j in question_hask:
         row_vector = (r_matrix[:, j].reshape(1, -1) != -1).astype(int)
@@ -26,10 +26,10 @@ def calculate_doa_k(mas_level, q_matrix, r_matrix, k):
     return DOA_k
 
 
-def DOA(mastery_level, q_matrix, r_matrix):
+def DOA(proficiency_level, q_matrix, r_matrix):
     know_n = q_matrix.shape[1]
     doa_k_list = Parallel(n_jobs=-1)(
-        delayed(calculate_doa_k)(mastery_level, q_matrix, r_matrix, k) for k in range(know_n))
+        delayed(calculate_doa_k)(proficiency_level, q_matrix, r_matrix, k) for k in range(know_n))
     return np.mean(doa_k_list)
 
 
