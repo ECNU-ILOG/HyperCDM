@@ -2,7 +2,6 @@ import numpy as np
 
 from scipy.spatial.distance import cosine
 from tqdm import tqdm
-from scipy.special import expit
 
 
 def cosine_similarity(X):
