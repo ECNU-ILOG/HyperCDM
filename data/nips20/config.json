@@ -1,0 +1,8 @@
+{
+  "dataset": "NeurIPS2020",
+  "q_file": "q.csv",
+  "data": "nips20TotalData.csv",
+  "student_num": 3000,
+  "exercise_num": 6000,
+  "knowledge_num": 268
+}

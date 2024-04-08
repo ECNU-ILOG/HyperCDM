@@ -5,6 +5,9 @@ We provide Math1 as sample datasets to validate the HyperCDM. You can reproduce 
 python main.py
 ```
 
+## Update
+We upload all online datasets utilized in the experiments (including NeurIPS2020, EdNet-1, ASSISTment17 and Junyi)
+
 ## Necessary packages
 ```
 pytorch 1.13.0+cu0.11

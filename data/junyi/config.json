@@ -1,0 +1,8 @@
+{
+  "dataset": "junyi",
+  "q_file": "q.csv",
+  "data": "junyiTotalData.csv",
+  "student_num": 10000,
+  "exercise_num": 734,
+  "knowledge_num": 734
+}

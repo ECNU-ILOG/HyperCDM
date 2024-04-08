@@ -1,0 +1,8 @@
+{
+  "dataset": "EdNet-1",
+  "q_file": "q.csv",
+  "data": "EdNet-1TotalData.csv",
+  "student_num": 1827,
+  "exercise_num": 11996,
+  "knowledge_num": 189
+}
