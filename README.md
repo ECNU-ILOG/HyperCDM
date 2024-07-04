@@ -1,12 +1,16 @@
 <div align='center'>
-<h1>Capturing Homogeneous Influence among Students: Hypergraph Cognitive Diagnosis for Intelligent Education Systems </h1>
+<h1>Capturing Homogeneous Influence among Students: Hypergraph Cognitive Diagnosis for Intelligent Education Systems</h1>
 <a href='https://www.jhshen.cn/'>Junhao Shen</a>, <a href='https://faculty.ecnu.edu.cn/_s16/qh_en/main.psp'>Hong Qian*</a>, <a href='https://scholar.google.com/citations?user=sRoqbLwAAAAJ&hl=en'>Shuo Liu</a>, <a href='https://faculty.ecnu.edu.cn/_s16/zw2_en_6444/main.psp'>Wei Zhang</a>, <a href='https://faculty.ecnu.edu.cn/_s8/jb2_en/main.psp'>Bo Jiang</a>, and <a href='https://faculty.ecnu.edu.cn/_s16/zam_en/main.psp'>Aimin Zhou</a>. (*Correspondence )
 
 <a href='https://aiedu.ecnu.edu.cn/'>Shanghai Institute of AI Education</a> and <a href='http://www.cs.ecnu.edu.cn/'>School of Computer Science and Technology</a>, East China Normal Universit
 
 <a href='https://hypercdm.kdd24.jhshen.cn/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-<a href='https://drive.google.com/file/d/1kEv0dEOGmPdD625LS3Y1q5PAkB71PHl-/view'><img src='https://img.shields.io/badge/Paper-PDF-orange'></a> 
+<a href='https://drive.google.com/file/d/1kEv0dEOGmPdD625LS3Y1q5PAkB71PHl-/view'><img src='https://img.shields.io/badge/Paper-PDF-orange'></a>
+
+<img src='asset/framework.png' />
 </div>
+
+This repository contains the code for the paper "Capturing Homogeneous Influence among Students: Hypergraph Cognitive Diagnosis for Intelligent Education Systems" published in proceedings of the 30th SIGKDD Conference on Knowledge Discovery and Data Mining (KDD 2024). We also upload the pre-print full paper, titled `full paper.pdf` in the folder named asset. 
 
 ## 📰 News 
 - [x] [2024.5.17] This work is accepted by KDD 2024 (20% acceptance rate) with the average score 5.5 out of 7.0.
