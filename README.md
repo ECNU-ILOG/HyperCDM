@@ -78,11 +78,11 @@ Specifically, `config.json` records all necessary settings of dataset like the n
 ```
 {
   "dataset": [String, the name of the dataset],
-  "qMatrixPath": [string, the relative path of Q matrix],
-  "dataPath": [string, the relative path of response logs],
-  "studentNumber": [int, the number of students],
-  "questionNumber": [int, the number of questions],
-  "knowledgeNumber": [int, the number of knowledge attributes]
+  "q_file": [string, the relative path of Q matrix],
+  "data": [string, the relative path of response logs],
+  "student_num": [int, the number of students],
+  "exercise_num": [int, the number of exercises],
+  "knowledge_num": [int, the number of knowledge concepts]
 }
 ```
 
