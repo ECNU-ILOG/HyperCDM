@@ -19,12 +19,91 @@ This repository contains the code for the paper "Capturing Homogeneous Influence
 
 ## 💻 Getting Started
 
+### File Tree
+```
+HyperCDM
+│  DOA.py
+│  homogeneity.py
+│  main.py
+│  README.md
+│
+├─asset
+│      framework.png
+│      full paper.pdf
+│
+└─data
+    ├─a17
+    │      a17TotalData.csv
+    │      config.json
+    │      q.csv
+    │
+    ├─EdNet-1
+    │      config.json
+    │      EdNet-1TotalData.csv
+    │      q.csv
+    │
+    ├─junyi
+    │      config.json
+    │      junyiTotalData.csv
+    │      q.csv
+    │
+    ├─Math1
+    │      config.json
+    │      Math1TotalData.csv
+    │      q.csv
+    │
+    └─nips20
+            config.json
+            nips20TotalData.csv
+            q.csv
+```
+
 ### Quick Start
 We provide Math1 as sample datasets to validate the HyperCDM. You can reproduce the results by directly running `main.py`, i.e.
 ```
 python main.py
 ```
-### File Tree
+
+### Run with other datasets
+#### Step 1. prepare dataset
+Refer to the sample dataset, you should prepare the following files:
+```
+├─dataset
+│  └─Your_dataset
+│          config.json
+│          data.csv   
+│          q.csv
+```
+Specifically, `config.json` records all necessary settings of dataset like the number of students, and the format of config.json is shown as following:
+```
+{
+  "dataset": [String, the name of the dataset],
+  "qMatrixPath": [string, the relative path of Q matrix],
+  "dataPath": [string, the relative path of response logs],
+  "studentNumber": [int, the number of students],
+  "questionNumber": [int, the number of questions],
+  "knowledgeNumber": [int, the number of knowledge attributes]
+}
+```
+
+`data.csv` consists of response logs in the following format:
+```
+[int, student_id1],[int, question_id1],[0/1, response to question_id1]
+[int, student_id1],[int, question_id2],[0/1, response to question_id2]
+...
+[int, student_idn],[int, question_idm],[0/1, response to question_idm]
+```
+
+`q.csv` contains the relevant between questions and knowledge attributes. Each entry in the $i$-th row and the $j$-th column means
+whether the $i$-th question involves the $j$-th knowledge attributes.
+
+#### Step 2. coding
+Refer to the `example.py`, you can change the path to different configuration file.
+
+#### Step 3. run code
+```
+python example.py
+```
 
 ### Necessary Packages
 ```
