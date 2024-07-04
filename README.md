@@ -98,11 +98,11 @@ Specifically, `config.json` records all necessary settings of dataset like the n
 whether the $i$-th question involves the $j$-th knowledge attributes.
 
 #### Step 2. coding
-Refer to the `example.py`, you can change the path to different configuration file.
+Refer to the `main.py`, you can change the path to different configuration file.
 
 #### Step 3. run code
 ```
-python example.py
+python main.py
 ```
 
 ### Necessary Packages
@@ -119,9 +119,9 @@ Should you have any questions and commemtns, post an issue here, or feel free to
 ## 📄 Citation
 If you find HyperCDM is helpful and and can inspire you in your reseach or applications, please kindly cite as follows.
 
-**BitTex**
+**BibTex**
 ```
-@inproceedings{shen2024hypercdm,
+@inproceedings{Shen2024hypercdm,
  author = {Shen, Junhao and 
            Qian, Hong and
            Liu, Shuo and
