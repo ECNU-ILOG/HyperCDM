@@ -4,7 +4,7 @@
 
 <a href='https://aiedu.ecnu.edu.cn/'>Shanghai Institute of AI Education</a>, <a href='http://www.cs.ecnu.edu.cn/'>School of Computer Science and Technology</a>
 
-East China Normal Universit
+East China Normal University
 
 <a href='https://hypercdm.kdd24.jhshen.cn/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 <a href='https://drive.google.com/file/d/1kEv0dEOGmPdD625LS3Y1q5PAkB71PHl-/view'><img src='https://img.shields.io/badge/Paper-PDF-orange'></a>
